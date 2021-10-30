@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content">
+
+
+	<androidx.constraintlayout.widget.ConstraintLayout
+			android:layout_width="match_parent"
+			android:layout_height="60dp" app:layout_constraintTop_toTopOf="parent"
+			app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="8dp">
+
+		<TextView
+				android:text="17A栋1F01u"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:id="@+id/item_location"
+				app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="10dp"
+				android:layout_marginStart="10dp" app:layout_constraintTop_toTopOf="parent"
+				android:layout_marginTop="5dp"/>
+		<ImageView
+				android:layout_width="77dp"
+				android:layout_height="33dp" app:srcCompat="@drawable/wash" android:id="@+id/item_imag"
+				app:layout_constraintTop_toBottomOf="@+id/item_location"
+				app:layout_constraintStart_toStartOf="@+id/item_location"/>
+		<TextView
+				android:text="TextView"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				app:layout_constraintStart_toEndOf="@+id/item_imag" app:layout_constraintTop_toTopOf="parent"
+				android:layout_marginTop="24dp" android:layout_marginLeft="10dp" android:layout_marginStart="10dp"
+				android:id="@+id/item_status"/>
+		<TextView
+				android:text="TextView"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:id="@+id/item_number"
+				app:layout_constraintStart_toEndOf="@+id/item_status"
+				android:layout_marginLeft="16dp" android:layout_marginStart="16dp"
+				app:layout_constraintTop_toTopOf="@+id/item_status"/>
+		<TextView
+				android:text="01F"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:id="@+id/textView12"
+				app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toBottomOf="@+id/item_number"
+				app:layout_constraintTop_toTopOf="@+id/item_number" android:layout_marginRight="10dp"
+				android:layout_marginEnd="10dp"/>
+
+		<ImageView
+				android:layout_width="10dp"
+				android:layout_height="17dp" app:srcCompat="@null"
+				android:id="@+id/item_sandGlass"
+				android:visibility="invisible"
+				app:layout_constraintStart_toEndOf="@+id/item_number"
+				app:layout_constraintTop_toTopOf="@+id/item_number"
+				app:layout_constraintBottom_toBottomOf="@+id/item_number" android:layout_marginLeft="10dp"
+				android:layout_marginStart="10dp" android:background="#FBFBFB"/>
+		<TextView
+				android:text=""
+				android:gravity="center"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:id="@+id/item_time"
+				app:layout_constraintBottom_toBottomOf="@+id/textView12"
+				app:layout_constraintTop_toTopOf="@+id/textView12" android:layout_marginLeft="5dp"
+				android:layout_marginStart="5dp" app:layout_constraintStart_toEndOf="@+id/item_sandGlass"/>
+
+
+	</androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
