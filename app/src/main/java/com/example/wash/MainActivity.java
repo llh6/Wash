@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Timer polling = new Timer();
     //10-29
     private static String flagall = "";
-
+    private int qidongCountq=1;
     public Button Working;
 
     @Override
@@ -309,7 +309,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         if (area.equals("1701")) {
                             //发送数据到Lora，上限为5
                             Broadcast.sendMessage2Lora((byte) TargetData, (byte) 1, (byte) Integer.parseInt(number));
-                            //System.out.println("我已经发送"+"1"+number);
+                            //System.out.println("我已经发送"+"1"+numberdu );
                             //休眠200ms使得接收信息完整
                         } else if (area.equals("1702")) {
                             //发送数据到Lora，上限为5
@@ -339,7 +339,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                         ChooseActivity.post_statue("1701" + f1.format(Util.Hex2Int(address)), "Norm");
                                     else if (chl.equals("02"))
                                         ChooseActivity.post_statue("1702" + f1.format(Util.Hex2Int(address)), "Norm");
-
+                                    if(TargetData==6){
+                                        System.out.println("HTTP请求");
+                                    }
+                                    if(TargetData==5) System.out.println("轮询");
                                     if (TargetData == 3) {
                                         if (chl.equals("01"))
                                             flagall = "1701" + f1.format(Util.Hex2Int(address));
@@ -354,13 +357,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                         ChooseActivity.post_statue("1701" + f1.format(Util.Hex2Int(address)), "Y");
                                     else if (chl.equals("02"))
                                         ChooseActivity.post_statue("1702" + f1.format(Util.Hex2Int(address)), "Y");
+                                    if(TargetData==6){
+                                        System.out.println("HTTP请求");
+                                    }
+                                    if(TargetData==5) System.out.println("轮询");
                                     System.out.println("数据处理完毕空闲");
                                 } else System.out.println("data有问题");
+                                Loramessage="";
                                 i = 5;
                             } else Loramessage = "";
                         } else {
                             //if(i==5) 判定为故障
-                            System.out.println("长度不够 Len=" + Loramessage.length());
+                            System.out.println("长度不够 Len=" + Loramessage.length()+" "+Loramessage);
                             Loramessage = "";
                         }
                     }
@@ -426,17 +434,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                                 wantWashaddress=-1;
                                                 t.cancel();
                                             }
-//                                        for (com.example.wash.entity.Wash wash : fragment_Wash.washerslist) {
-//                                            System.out.println(wash.getWid()+"  "+wash.getstatus());
-//                                            if (wash.getWid().equals(wantWashaddress) && wash.getstatus().equals("忙碌")) {
-//
-//                                                System.out.println("刷卡成功&&启动机器成功");
-//                                                ifAllReady = true;
-//                                                wantWashaddress = -1;
-//                                                t.cancel();
-//                                            }
-//                                        }
+                                            else{
+                                                if(qidongCountq==100){
+                                                    qidongCountq=1;
+                                                    t.cancel();
+                                                }
+                                                qidongCountq++;
 
+                                            }
                                     }
 
                                 }, 0, 200);
@@ -476,23 +481,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         //轮询，开机使用一次
-//        polling.schedule(new TimerTask() {
-//            @Override
-//            public void run() {
-//                //设置轮询启动的洗衣机数目 ：pollingnumber
-//                for(com.example.wash.entity.Wash wash:fragment_Wash.washerslist){
-//                    //Broadcast.sendMessage2Lora((byte)1, washnumber);
-//                    //System.out.println(washnumber);
-//                    queue.add(1);queue.add(Integer.valueOf(wash.getNum()));
-//                    try {
-//                        Thread.sleep(2000);//每次停顿时间
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
-//                    //System.out.println("4");
-//                }
-//            }
-//        },100);
+        polling.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                //设置轮询启动的洗衣机数目 ：pollingnumber
+                for(com.example.wash.entity.Wash wash:fragment_Wash.washerslist){
+                    //Broadcast.sendMessage2Lora((byte)1, washnumber);
+                    //System.out.println(washnumber);
+                    queue.add(5);queue.add(Integer.valueOf(wash.getWid()));
+                    try {
+                        Thread.sleep(2000);//每次停顿时间
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    //System.out.println("4");
+                }
+            }
+        },2000);
 
     }
 

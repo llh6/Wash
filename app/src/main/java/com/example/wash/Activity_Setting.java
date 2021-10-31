@@ -29,6 +29,7 @@ import com.example.wash.entity.Wash;
 import com.example.wash.self_style.WheelView;
 
 import java.io.IOException;
+import java.sql.SQLOutput;
 import java.text.DecimalFormat;
 import java.text.Format;
 import java.util.ArrayList;
@@ -292,9 +293,10 @@ public class Activity_Setting extends AppCompatActivity {
                     DataAll dataAll = Utility.handleWashersResponse(responseText);
                     for (Wash wash : dataAll.washerList) {
                         if (wash.check_statue()){
-                            MainActivity.queue.add(2);
+                            System.out.println("我要去问"+wash.getWid());
+                            MainActivity.queue.add(6);
                             MainActivity.queue.add(Integer.parseInt(wash.getWid()));
-                            wash.setstatus("Y");
+                            //wash.setstatus("Y");
                         }
                         washerslist.add(wash);
                     }
