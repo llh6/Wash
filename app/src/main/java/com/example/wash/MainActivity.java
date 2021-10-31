@@ -35,6 +35,8 @@ import com.hoho.android.usbserial.driver.UsbSerialProber;
 import com.hoho.android.usbserial.util.SerialInputOutputManager;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -82,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         //创建通信对象
         broadCast = new Broadcast();
+        EventBus.getDefault().register(this);
         initUI();
         initTab();
 
@@ -127,6 +130,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mImag1.setImageResource(R.drawable.washingse);
         mImag2.setImageResource(R.drawable.dryse);
         mImag3.setImageResource(R.drawable.settingse);
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    //接受来自Mainactivity的消息，自动调用
+    public void hanldeEvent(String str) {
+        if (str.equals("OpenLora")){
+            initUsbSerial();
+        }
     }
 
     @Override
@@ -219,9 +229,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onResume() {
         super.onResume();
-        EventBus.getDefault().post(str);
+        //EventBus.getDefault().post(str);
     }
 
+    @Override
+    protected void onDestroy() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroy();
+    }
 
     //初始化USB
     public void initUsbSerial() {

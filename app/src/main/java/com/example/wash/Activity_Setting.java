@@ -28,6 +28,8 @@ import com.example.wash.entity.Utility;
 import com.example.wash.entity.Wash;
 import com.example.wash.self_style.WheelView;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.Format;
@@ -228,7 +230,7 @@ public class Activity_Setting extends AppCompatActivity {
     }
 
     public void OpenLora(View view) {
-
+        EventBus.getDefault().post("OpenLora");
     }
 
     public class InputFilterMinMax implements InputFilter {
