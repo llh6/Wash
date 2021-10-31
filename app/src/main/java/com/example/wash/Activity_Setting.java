@@ -229,8 +229,9 @@ public class Activity_Setting extends AppCompatActivity {
         alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(green);
     }
 
-    public void OpenLora(View view) {
-        EventBus.getDefault().post("OpenLora");
+    public void openLora(View view) {
+       /* System.out.println("要要我想Main发送信息了");
+        EventBus.getDefault().post(new String("OpenLora"));*/
     }
 
     public class InputFilterMinMax implements InputFilter {
@@ -294,11 +295,11 @@ public class Activity_Setting extends AppCompatActivity {
                     DataAll dataAll = Utility.handleWashersResponse(responseText);
                     for (Wash wash : dataAll.washerList) {
                         washerslist.add(wash);
-                        if (wash.check_statue()){
+                        /*if (wash.check_statue()){
                             MainActivity.queue.add(2);
                             MainActivity.queue.add(Integer.parseInt(wash.getWid()));
                             wash.setstatus("Y");
-                        }
+                        }*/
 
                     }
                 } catch (Exception e) {

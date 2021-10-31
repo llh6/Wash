@@ -12,6 +12,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -77,6 +78,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //10-29
     private static String flagall = "";
 
+    public Button Working;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +96,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
       初始化UI
     */
     private void initUI() {
+        Working=findViewById(R.id.working);
+
         mTab1 = findViewById(R.id.id_tab1);
         mTab2 = findViewById(R.id.id_tab2);
         mTab3 = findViewById(R.id.id_tab3);
@@ -131,12 +135,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mImag2.setImageResource(R.drawable.dryse);
         mImag3.setImageResource(R.drawable.settingse);
     }
+    public void Open(View view) {
+        initUsbSerial();
+    }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     //接受来自Mainactivity的消息，自动调用
     public void hanldeEvent(String str) {
+        /*System.out.println("我来了大苏打");
         if (str.equals("OpenLora")){
             initUsbSerial();
-        }
+        }*/
     }
 
     @Override
@@ -207,6 +216,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivityForResult(intent, 1);
     }
 
+
+
     private class MyPagerChangeListener implements ViewPager.OnPageChangeListener {
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -233,9 +244,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
+    protected void onStop() {
+        System.out.println("我是mani的Stop");
+        super.onStop();
+    }
+
+    @Override
     protected void onDestroy() {
-        EventBus.getDefault().unregister(this);
+        System.out.println("我是mani的DEStory");
         super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     //初始化USB
@@ -322,10 +340,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                     else if (chl.equals("02"))
                                         ChooseActivity.post_statue("1702" + f1.format(Util.Hex2Int(address)), "Norm");
 
-                                    if (TargetData == 3) {
-                                        flagall = "1701" + f1.format(Util.Hex2Int(address));
-                                    }
-
+//                                    if (TargetData == 3) {
+//                                        flagall = "1701" + f1.format(Util.Hex2Int(address));
+//                                    }
+                                    System.out.println("数据处理完毕忙碌");
                                     //fragment_Wash.washerslist.get(Integer.valueOf(address).intValue()).setstatus("忙碌");
                                 } else if (data.equals("01")) {
                                     Format f1 = new DecimalFormat("000");
@@ -333,6 +351,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                         ChooseActivity.post_statue("1701" + f1.format(Util.Hex2Int(address)), "Y");
                                     else if (chl.equals("02"))
                                         ChooseActivity.post_statue("1702" + f1.format(Util.Hex2Int(address)), "Y");
+                                    System.out.println("数据处理完毕空闲");
                                 } else System.out.println("data有问题");
                                 i = 5;
                             } else Loramessage = "";
@@ -357,7 +376,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        System.out.println(tempdata);
+                        //System.out.println(tempdata);
                         Loramessage += tempdata;
                     }
                 });
@@ -396,7 +415,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 t.schedule(new TimerTask() {
                                     @Override
                                     public void run() {
-
 //                                            if(String.valueOf(wantWashaddress).equals(flagall)) {
 //                                                System.out.println(wantWashaddress);
 //                                                System.out.println("刷卡成功&&启动机器成功");
@@ -406,7 +424,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                                                t.cancel();
 //                                            }
                                         for (com.example.wash.entity.Wash wash : fragment_Wash.washerslist) {
-                                            if (wash.getNum().equals(wantWashaddress) && wash.getstatus().equals("忙碌")) {
+                                            //System.out.println(wash.getWid()+"  "+wash.getstatus());
+                                            if (wash.getWid().equals(wantWashaddress) && wash.getstatus().equals("忙碌")) {
+
                                                 System.out.println("刷卡成功&&启动机器成功");
                                                 ifAllReady = true;
                                                 wantWashaddress = -1;

@@ -107,7 +107,7 @@ public class fragment_Wash extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EventBus.getDefault().register(this);
+        //EventBus.getDefault().register(this);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -122,7 +122,8 @@ public class fragment_Wash extends Fragment {
                         postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                myRecyclerAdapter.notifyDataSetChanged();
+                                if (myRecyclerAdapter!=null)
+                                    myRecyclerAdapter.notifyDataSetChanged();
                             }
                         },1500);
                         break;
@@ -257,7 +258,7 @@ public class fragment_Wash extends Fragment {
        // Toast.makeText(getActivity(),"第"+itemposition+"刷新了",Toast.LENGTH_LONG).show();
     }
 
-    @Subscribe
+/*    @Subscribe
     //接受来自Mainactivity的消息，自动调用
     public void hanldeEvent(String str) {
         //分别为number,time,money
@@ -272,7 +273,7 @@ public class fragment_Wash extends Fragment {
 //        wash.setMoney(sArray[2]);
 //        washerslist.set(itemposition-1,wash);
 //        myRecyclerAdapter.notifyItemChanged(itemposition-1);
-    }
+    }*/
 
     //查询历史
     public static void getAllWashers(String url) {
@@ -307,7 +308,7 @@ public class fragment_Wash extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        EventBus.getDefault().unregister(this);
+        //EventBus.getDefault().unregister(this);
     }
 
 }
