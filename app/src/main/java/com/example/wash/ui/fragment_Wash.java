@@ -35,6 +35,9 @@ import com.example.wash.adapter.myRecyclerAdapter;
 import com.example.wash.entity.DataAll;
 import com.example.wash.entity.Utility;
 import com.example.wash.entity.Wash;
+import com.scwang.smartrefresh.header.DropboxHeader;
+import com.scwang.smartrefresh.header.FlyRefreshHeader;
+import com.scwang.smartrefresh.header.PhoenixHeader;
 import com.scwang.smartrefresh.header.WaveSwipeHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -220,7 +223,7 @@ public class fragment_Wash extends Fragment {
      */
     private void handleDownPullUpdate() {
         mySmartRefreshLayout.setEnabled(true);
-        mySmartRefreshLayout.setRefreshHeader(new WaveSwipeHeader(getContext()));
+        mySmartRefreshLayout.setRefreshHeader(new PhoenixHeader(getContext()));
         mySmartRefreshLayout.setRefreshFooter(new ClassicsFooter(getContext()));
         mySmartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
