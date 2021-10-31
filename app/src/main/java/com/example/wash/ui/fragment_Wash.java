@@ -42,6 +42,7 @@ import com.scwang.smartrefresh.header.WaveSwipeHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
+import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
@@ -82,8 +83,7 @@ public class fragment_Wash extends Fragment {
     private SmartRefreshLayout mySmartRefreshLayout;
     private TextView txt_pulldown;
     private RecyclerView.OnScrollListener loadingListener;
-    private Wash wash;
-    private int itemposition;
+    Handler h;
     public fragment_Wash() {
         // Required empty public constructor
     }
@@ -115,7 +115,7 @@ public class fragment_Wash extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        Handler h = new Handler() {
+        h = new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 switch (msg.what) {
@@ -223,7 +223,7 @@ public class fragment_Wash extends Fragment {
      */
     private void handleDownPullUpdate() {
         mySmartRefreshLayout.setEnabled(true);
-        mySmartRefreshLayout.setRefreshHeader(new PhoenixHeader(getContext()));
+        mySmartRefreshLayout.setRefreshHeader(new ClassicsHeader(getContext()));
         mySmartRefreshLayout.setRefreshFooter(new ClassicsFooter(getContext()));
         mySmartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
@@ -231,10 +231,13 @@ public class fragment_Wash extends Fragment {
                 new Timer().schedule(new TimerTask() {
                     @Override
                     public void run() {
-                        //结束加载
+                        Message message = new Message();
+                        message.what = 1;
+                        h.sendMessage(message);
                         mySmartRefreshLayout.finishRefresh();
                     }
                 },1000);
+
                 Toast.makeText(getActivity(), "刷新成功", Toast.LENGTH_SHORT).show();
             }
         });
@@ -244,6 +247,9 @@ public class fragment_Wash extends Fragment {
                 new Timer().schedule(new TimerTask() {
                     @Override
                     public void run() {
+                        Message message = new Message();
+                        message.what = 1;
+                        h.sendMessage(message);
                         mySmartRefreshLayout.finishLoadmore();
                     }
                 }, 1000);
