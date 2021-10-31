@@ -101,10 +101,6 @@ public class fragment_Setting extends Fragment {
                 //mymainActivity.initUsbSerial();
                 Intent intent = new Intent(getActivity(), Activity_Setting.class);
                 startActivity(intent);
-
-
-
-
                 check_login(username, password);
                 if (username.equals(""))
                 {
