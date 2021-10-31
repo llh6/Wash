@@ -95,7 +95,7 @@ public class Wash {
             Date date_now = new Date(System.currentTimeMillis());
             long res = date_end.getTime() - date_now.getTime();
             res = res / 1000 / 60;
-            if (res <= 0) {
+            if (res < 0) {
                 return true;
             }
         }catch (Exception e){

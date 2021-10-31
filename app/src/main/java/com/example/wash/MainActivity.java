@@ -335,8 +335,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                     //System.out.println(1111);
                                     //System.out.println("我已经发送给后台1701");
                                     Format f1 = new DecimalFormat("000");
-                                    if (chl.equals("01"))
+                                    if (chl.equals("01")){
                                         ChooseActivity.post_statue("1701" + f1.format(Util.Hex2Int(address)), "Norm");
+                                        System.out.println("发送HTTP "+f1.format(Util.Hex2Int(address)));
+                                    }
+
                                     else if (chl.equals("02"))
                                         ChooseActivity.post_statue("1702" + f1.format(Util.Hex2Int(address)), "Norm");
                                     if(TargetData==6){

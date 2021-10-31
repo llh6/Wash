@@ -273,6 +273,7 @@ public class ChooseActivity extends AppCompatActivity {
 //        }
 //    }
     public static void  post_statue(String wid, String statue){
+
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder()
                 .url("http://"+Activity_Setting.url+"/api/washer?pageNum=1&pageSize=1000&search=&widStart=&widEnd=&widTarget="+wid+"&widStatus="+statue)
@@ -287,6 +288,7 @@ public class ChooseActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
+                System.out.println("我收到了"+wid+" "+statue+" "+Activity_Setting.url);
             }
         });
     }

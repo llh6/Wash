@@ -49,7 +49,7 @@ public class myRecyclerAdapter extends RecyclerView.Adapter<myRecyclerAdapter.My
             holder.myTime.setVisibility(View.GONE);
             holder.myNumber.setTextColor(context.getResources().getColor(R.color.black));
             holder.myStatus.setTextColor(context.getResources().getColor(R.color.black));
-            new ChooseActivity().post_statue(wash.getWid(),"Y");
+            //new ChooseActivity().post_statue(wash.getWid(),"Y");
         }
         else  if (wash.getstatus().equals("忙碌")){
            holder.myImag.setImageDrawable(context.getResources().getDrawable(R.drawable.wash_ing));

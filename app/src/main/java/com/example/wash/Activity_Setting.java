@@ -293,7 +293,7 @@ public class Activity_Setting extends AppCompatActivity {
                     DataAll dataAll = Utility.handleWashersResponse(responseText);
                     for (Wash wash : dataAll.washerList) {
                         if (wash.check_statue()){
-                            System.out.println("我要去问"+wash.getWid());
+                            System.out.println("这是要我问的 "+wash.getWid());
                             MainActivity.queue.add(6);
                             MainActivity.queue.add(Integer.parseInt(wash.getWid()));
                             //wash.setstatus("Y");
