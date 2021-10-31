@@ -178,7 +178,7 @@ public class ChooseActivity extends AppCompatActivity {
                     message.what=1001;
                     mhandler.sendMessage(message);
                     MainActivity.ifAllReady=false;
-
+                    count=1;
                     timer.cancel();
                 }
                 else {

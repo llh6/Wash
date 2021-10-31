@@ -340,9 +340,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                     else if (chl.equals("02"))
                                         ChooseActivity.post_statue("1702" + f1.format(Util.Hex2Int(address)), "Norm");
 
-//                                    if (TargetData == 3) {
-//                                        flagall = "1701" + f1.format(Util.Hex2Int(address));
-//                                    }
+                                    if (TargetData == 3) {
+                                        if (chl.equals("01"))
+                                            flagall = "1701" + f1.format(Util.Hex2Int(address));
+                                        else if (chl.equals("02"))
+                                            flagall = "1702" + f1.format(Util.Hex2Int(address));
+                                    }
                                     System.out.println("数据处理完毕忙碌");
                                     //fragment_Wash.washerslist.get(Integer.valueOf(address).intValue()).setstatus("忙碌");
                                 } else if (data.equals("01")) {
@@ -415,28 +418,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 t.schedule(new TimerTask() {
                                     @Override
                                     public void run() {
-//                                            if(String.valueOf(wantWashaddress).equals(flagall)) {
-//                                                System.out.println(wantWashaddress);
-//                                                System.out.println("刷卡成功&&启动机器成功");
-//                                                ifAllReady=true;
-//                                                flagall="";
-//                                                wantWashaddress=-1;
-//                                                t.cancel();
-//                                            }
-                                        for (com.example.wash.entity.Wash wash : fragment_Wash.washerslist) {
-                                            //System.out.println(wash.getWid()+"  "+wash.getstatus());
-                                            if (wash.getWid().equals(wantWashaddress) && wash.getstatus().equals("忙碌")) {
-
+                                            if(String.valueOf(wantWashaddress).equals(flagall)) {
+                                                System.out.println(wantWashaddress);
                                                 System.out.println("刷卡成功&&启动机器成功");
-                                                ifAllReady = true;
-                                                wantWashaddress = -1;
+                                                ifAllReady=true;
+                                                flagall="";
+                                                wantWashaddress=-1;
                                                 t.cancel();
                                             }
-                                        }
+//                                        for (com.example.wash.entity.Wash wash : fragment_Wash.washerslist) {
+//                                            System.out.println(wash.getWid()+"  "+wash.getstatus());
+//                                            if (wash.getWid().equals(wantWashaddress) && wash.getstatus().equals("忙碌")) {
+//
+//                                                System.out.println("刷卡成功&&启动机器成功");
+//                                                ifAllReady = true;
+//                                                wantWashaddress = -1;
+//                                                t.cancel();
+//                                            }
+//                                        }
 
                                     }
 
-                                }, 0, 100);
+                                }, 0, 200);
 
                             }
                         }
