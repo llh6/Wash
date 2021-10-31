@@ -28,8 +28,6 @@ import com.example.wash.entity.Utility;
 import com.example.wash.entity.Wash;
 import com.example.wash.self_style.WheelView;
 
-import org.greenrobot.eventbus.EventBus;
-
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.Format;
@@ -229,9 +227,8 @@ public class Activity_Setting extends AppCompatActivity {
         alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(green);
     }
 
-    public void openLora(View view) {
-       /* System.out.println("要要我想Main发送信息了");
-        EventBus.getDefault().post(new String("OpenLora"));*/
+    public void OpenLora(View view) {
+
     }
 
     public class InputFilterMinMax implements InputFilter {
@@ -294,13 +291,12 @@ public class Activity_Setting extends AppCompatActivity {
                 try {
                     DataAll dataAll = Utility.handleWashersResponse(responseText);
                     for (Wash wash : dataAll.washerList) {
-                        washerslist.add(wash);
-                        /*if (wash.check_statue()){
+                        if (wash.check_statue()){
                             MainActivity.queue.add(2);
                             MainActivity.queue.add(Integer.parseInt(wash.getWid()));
                             wash.setstatus("Y");
-                        }*/
-
+                        }
+                        washerslist.add(wash);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

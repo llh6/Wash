@@ -117,15 +117,19 @@ public class fragment_Wash extends Fragment {
             public void handleMessage(Message msg) {
                 switch (msg.what) {
                     case 1:
-                        SharedPreferences pref = getActivity().getSharedPreferences("data", MODE_PRIVATE);
-                        getRangeWashers(url, pref.getInt("start_num", 1), pref.getInt("end_num", 100), pref.getString("address", "全部"));
-                        postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                if (myRecyclerAdapter!=null)
-                                    myRecyclerAdapter.notifyDataSetChanged();
-                            }
-                        },1500);
+                        try {
+                            SharedPreferences pref = getActivity().getSharedPreferences("data", MODE_PRIVATE);
+                            getRangeWashers(url, pref.getInt("start_num", 1), pref.getInt("end_num", 100), pref.getString("address", "全部"));
+                            postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    if (myRecyclerAdapter!=null)
+                                        myRecyclerAdapter.notifyDataSetChanged();
+                                }
+                            },1500);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                         break;
                     case 2:
                         break;
