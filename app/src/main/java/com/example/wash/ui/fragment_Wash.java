@@ -223,7 +223,7 @@ public class fragment_Wash extends Fragment {
      */
     private void handleDownPullUpdate() {
         mySmartRefreshLayout.setEnabled(true);
-        mySmartRefreshLayout.setRefreshHeader(new ClassicsHeader(getContext()));
+        mySmartRefreshLayout.setRefreshHeader(new PhoenixHeader(getContext()));
         mySmartRefreshLayout.setRefreshFooter(new ClassicsFooter(getContext()));
         mySmartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
