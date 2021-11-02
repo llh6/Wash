@@ -129,7 +129,7 @@ public class fragment_Wash extends Fragment {
                                     if (myRecyclerAdapter!=null)
                                         myRecyclerAdapter.notifyDataSetChanged();
                                 }
-                            },1500);
+                            },1000);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -266,9 +266,9 @@ public class fragment_Wash extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        //myRecyclerAdapter.notifyItemChanged(itemposition-1);
-        myRecyclerAdapter.notifyDataSetChanged();
-       // Toast.makeText(getActivity(),"第"+itemposition+"刷新了",Toast.LENGTH_LONG).show();
+        Message message = new Message();
+        message.what = 1;
+        h.sendMessage(message);
     }
 
 /*    @Subscribe
